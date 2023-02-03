@@ -19,44 +19,71 @@ public class MainActivity extends AppCompatActivity {
         tvResultado = findViewById(R.id.tvResultado);
     }
 
-    public void UpdateRes(View view){
+    public void UpdateRes(){
         tvResultado.setText(String.valueOf(res));
     }
 
-    public void Escribir(View view, int num) {
-        res = res * 10;
-        res += num;
-        UpdateRes(view);
+    public void Escribir(int num) {
+        ram = ram * 10;
+        ram += num;
     }
 
+    public void AC(){
+        res = 0;
+        UpdateRes();
+    }
+
+    public void Percent(){
+
+    }
+    public void Change(){
+
+    }
+    public void Plus(){
+
+    }
+    public void Minus(){
+
+    }
+    public void Div(){
+
+    }
+    public void Times(){
+
+    }
+    public void Equals(){
+        res = ram;
+        UpdateRes();
+    }
+
+    public void Escribir0(View view) {
+        Escribir(0);
+    }
     public void Escribir1(View view) {
-        Escribir(view, 1);
+        Escribir(1);
     }
     public void Escribir2(View view) {
-        Escribir(view, 2);
+        Escribir(2);
     }
     public void Escribir3(View view) {
-        Escribir(view, 3);
+        Escribir(3);
     }
     public void Escribir4(View view) {
-        Escribir(view, 4);
+        Escribir(4);
     }
     public void Escribir5(View view) {
-        Escribir(view, 5);
+        Escribir(5);
     }
     public void Escribir6(View view) {
-        Escribir(view, 6);
+        Escribir(6);
     }
     public void Escribir7(View view) {
-        Escribir(view, 7);
+        Escribir(7);
     }
     public void Escribir8(View view) {
-        Escribir(view, 8);
+        Escribir(8);
     }
     public void Escribir9(View view) {
-        Escribir(view, 9);
-    }
-    public void Escribir0(View view) {
-        Escribir(view, 0);
+        Escribir(9);
     }
 }
