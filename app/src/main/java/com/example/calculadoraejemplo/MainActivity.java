@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     int decimalPlace = 0;
     boolean point = false;
     boolean newNum = true;
-    boolean error = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void UpdateRes(){
         String newRes = "";
+        boolean error = Double.isNaN(res) || Double.isInfinite(res);
         if(!error) {
             newRes = String.valueOf(res);
         }
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         if(newNum){
             resRam = 0;
             positivo = true;
-            error = false;
         }
 
         if(!positivo){
@@ -152,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.operacion = operacion;
         res = 0;
-        error = Double.isNaN(res) && !Double.isNaN(ram);
         UpdateRes();
         newNum = true;
     }
