@@ -7,14 +7,15 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvResultado;
-    float res = 0.0f;
-    float ram = 0.0f;
+    double res = 0.0;
+    double ram = 0.0;
+    String resRam = "0";
     String operacion = "";
     boolean positivo = true;
-    boolean percent = false;
     int decimalPlace = 0;
     boolean point = false;
     boolean newNum = true;
+    boolean error = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,30 +26,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void UpdateRes(){
-        String newRes = " ";
-
-        if(percent){
-            newRes = String.valueOf(res * 100) + "%";
-        }else{
+        String newRes = "";
+        if(!error) {
             newRes = String.valueOf(res);
         }
-        tvResultado.setText(newRes);
+        else{
+            newRes = "Operacion invalida";
+        }
+        writeRes(newRes);
+    }
+
+    public void writeRes(String res){
+        tvResultado.setText(res);
     }
 
     public void Escribir(int num) {
-        float numRam = num;
-        float resRam = res;
+        double numRam = num;
+        double resRam = res;
 
         if(newNum){
             resRam = 0;
+            positivo = true;
+            error = false;
         }
 
         if(!positivo){
             numRam = numRam * -1;
-        }
-
-        if(percent){
-            numRam = numRam/100;
         }
 
         if(newNum){
@@ -75,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Point(View view){
+        if(!point){
+            resRam += ".";
+        }
         point = true;
     }
 
@@ -92,15 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Percent(View view){
-        percent = !percent;
-
-        if(percent){
-            res = res/100;
-        }else{
-            res = res*100;
-        }
-
-        UpdateRes();
+        Operacion("%");
     }
     public void Change(View view){
         res = res * -1;
@@ -144,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
             case "/":
                 ram = ram / res;
                 break;
+            case "%":
+                ram = ram * res / 100;
+                break;
             default:
                 ram = res;
                 break;
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.operacion = operacion;
         res = 0;
+        error = Double.isNaN(res) && !Double.isNaN(ram);
         UpdateRes();
         newNum = true;
     }
