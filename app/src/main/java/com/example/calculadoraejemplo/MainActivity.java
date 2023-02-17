@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         UpdateRes();
+        newNum = true;
     }
 
     public void Inverse(View view) {
